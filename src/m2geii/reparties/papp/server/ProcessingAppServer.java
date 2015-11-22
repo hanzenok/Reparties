@@ -8,6 +8,11 @@ public class ProcessingAppServer {
 
 	public static void main(String[] args) throws RemoteException, MalformedURLException {
 		
+//		if(System.getSecurityManager() == null) {
+//			
+//			System.setSecurityManager(new SecurityManager());
+//		}
+		
 		System.out.println("Creation of object");
 		ProcessingApp pa = new ProcessingApp();
 		
