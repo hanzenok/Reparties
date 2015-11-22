@@ -1,7 +1,13 @@
+package m2geii.reparties.mapp;
+
 import java.net.MalformedURLException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
+
+import m2geii.reparties.matrix.Matrix;
+import m2geii.reparties.matrix.MatrixException;
+import m2geii.reparties.papp.inter.ProcessingAppInterface;
 
 public class client {
 

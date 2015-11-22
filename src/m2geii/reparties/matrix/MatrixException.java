@@ -1,6 +1,9 @@
+package m2geii.reparties.matrix;
 
 public class MatrixException extends Exception{
 	
+	private static final long serialVersionUID = 1L;
+
 	public MatrixException(){}
 	
 	public MatrixException(String message){

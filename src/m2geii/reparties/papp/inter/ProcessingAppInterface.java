@@ -1,5 +1,10 @@
+package m2geii.reparties.papp.inter;
+
 import java.rmi.Remote;
 import java.rmi.RemoteException;
+
+import m2geii.reparties.matrix.Matrix;
+import m2geii.reparties.matrix.MatrixException;
 
 public interface ProcessingAppInterface extends Remote {
 	

@@ -1,7 +1,15 @@
+package m2geii.reparties.papp.server;
+
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 
+import m2geii.reparties.matrix.Matrix;
+import m2geii.reparties.matrix.MatrixException;
+import m2geii.reparties.papp.inter.ProcessingAppInterface;
+
 public class ProcessingApp extends UnicastRemoteObject implements ProcessingAppInterface {
+	
+	private static final long serialVersionUID = 1L;
 	
 	private int ps;
 	public int nb_clients;

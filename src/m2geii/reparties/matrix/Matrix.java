@@ -1,7 +1,8 @@
+package m2geii.reparties.matrix;
+
 import java.io.Serializable;
 
 public class Matrix implements Serializable{
-	
 
 	private static final long serialVersionUID = 1L;
 	
