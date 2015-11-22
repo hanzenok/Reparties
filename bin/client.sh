@@ -1,3 +1,3 @@
-java -cp interface.jar:client.jar:matrix.jar -Djava.security.policy=client.policy m2geii.reparties.mapp.client
+java -cp papp_inter.jar:mapp.jar:matrix.jar -Djava.security.policy=client.policy m2geii.reparties.mapp.client
 
 
