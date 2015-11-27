@@ -27,8 +27,6 @@ public class ProcessMultS extends Process{
 		try {Thread.sleep(duration*1000);} 
 		catch(InterruptedException e) {Thread.currentThread().interrupt();}
 		
-		System.out.println("end process: " + duration);
-		
 		//calcule
 		int i,j;
 		int n = M.rows();
@@ -42,6 +40,8 @@ public class ProcessMultS extends Process{
 				catch (MatrixException e) {e.printStackTrace();}
 			}
 		}
+		
+		System.out.println("end process:\n" + M);
 	}
 	
 	
