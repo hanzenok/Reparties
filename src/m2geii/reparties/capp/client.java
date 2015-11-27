@@ -1,4 +1,4 @@
-package m2geii.reparties.mapp;
+package m2geii.reparties.capp;
 
 import java.net.MalformedURLException;
 import java.rmi.Naming;
@@ -7,7 +7,7 @@ import java.rmi.RemoteException;
 
 import m2geii.reparties.matrix.Matrix;
 import m2geii.reparties.matrix.MatrixException;
-import m2geii.reparties.papp.inter.ProcessingAppInterface;
+import m2geii.reparties.inters.ManagerAppInterface;
 
 public class client {
 
@@ -24,7 +24,7 @@ public class client {
 				tab[i][j] = i+j;
 			
 		Matrix M = new Matrix(n, m, tab);
-		ProcessingAppInterface pa = (ProcessingAppInterface)Naming.lookup("123");
+		ManagerAppInterface pa = (ManagerAppInterface)Naming.lookup("122");
 		
 		System.out.println("Before: \n" + M);
 		Matrix M2 = pa.mult(M, 2);

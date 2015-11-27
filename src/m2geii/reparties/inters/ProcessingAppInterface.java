@@ -1,4 +1,4 @@
-package m2geii.reparties.papp.inter;
+package m2geii.reparties.inters;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;

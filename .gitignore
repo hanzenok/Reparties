@@ -1,7 +1,6 @@
 *.pydevproject
 .metadata
 .gradle
-bin/
 tmp/
 *.tmp
 *.bak
@@ -10,6 +9,7 @@ tmp/
 local.properties
 .settings/
 .loadpath
+.gitignore
 
 # Eclipse Core
 .project

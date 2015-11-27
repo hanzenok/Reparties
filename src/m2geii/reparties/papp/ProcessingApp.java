@@ -1,11 +1,11 @@
-package m2geii.reparties.papp.server;
+package m2geii.reparties.papp;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 
 import m2geii.reparties.matrix.Matrix;
 import m2geii.reparties.matrix.MatrixException;
-import m2geii.reparties.papp.inter.ProcessingAppInterface;
+import m2geii.reparties.inters.ProcessingAppInterface;
 import m2geii.reparties.queue.Queue;
 
 public class ProcessingApp extends UnicastRemoteObject implements ProcessingAppInterface {
@@ -47,6 +47,8 @@ public class ProcessingApp extends UnicastRemoteObject implements ProcessingAppI
 //		
 //		try {Thread.sleep(8*1000);} 
 //		catch(InterruptedException e) {Thread.currentThread().interrupt();}
+		
+		System.out.println("ProcessingApp calculates smth...");
 		
 		int i,j;
 		int n = M.rows();

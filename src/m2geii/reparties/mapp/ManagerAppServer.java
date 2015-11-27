@@ -1,13 +1,13 @@
-package m2geii.reparties.papp.server;
+package m2geii.reparties.mapp;
 
 import java.net.MalformedURLException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 
-import m2geii.reparties.papp.inter.ProcessingAppInterface;
+import m2geii.reparties.inters.ManagerAppInterface;
 
-public class ProcessingAppServer {
+public class ManagerAppServer {
 
 	public static void main(String[] args) throws RemoteException, MalformedURLException {
 		
@@ -17,10 +17,10 @@ public class ProcessingAppServer {
 		}
 		
 		System.out.println("Creation of object");
-		ProcessingAppInterface pa = new ProcessingApp();
+		ManagerAppInterface ma = new ManagerApp();
 		
 	    Registry registry = LocateRegistry.getRegistry();
-	    registry.rebind("123", pa);
+	    registry.rebind("122", ma);
 	    System.out.println("Server launched");
 
 	}
