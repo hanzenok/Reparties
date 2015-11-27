@@ -21,9 +21,13 @@ public class ProcessMultS extends Process{
 	@Override
 	public void runProcess() {
 		
+		System.out.println("start process: " + duration);
+		
 		//simulation d'attente
 		try {Thread.sleep(duration*1000);} 
 		catch(InterruptedException e) {Thread.currentThread().interrupt();}
+		
+		System.out.println("end process: " + duration);
 		
 		//calcule
 		int i,j;
