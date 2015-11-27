@@ -30,13 +30,11 @@ public class ProcessMultS extends Process{
 		int n = M.rows();
 		int m = M.cols();
 		
-		Matrix res = M;
-		
 		for(i=0;i<n;i++){
 			
 			for(j=0;j<m;j++){
 				
-				try {res.setValue(i, j, M.getValue(i, j)*scal);} 
+				try {M.setValue(i, j, M.getValue(i, j)*scal);} 
 				catch (MatrixException e) {e.printStackTrace();}
 			}
 		}

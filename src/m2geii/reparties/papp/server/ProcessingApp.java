@@ -6,13 +6,16 @@ import java.rmi.server.UnicastRemoteObject;
 import m2geii.reparties.matrix.Matrix;
 import m2geii.reparties.matrix.MatrixException;
 import m2geii.reparties.papp.inter.ProcessingAppInterface;
+import m2geii.reparties.queue.Queue;
 
 public class ProcessingApp extends UnicastRemoteObject implements ProcessingAppInterface {
 	
 	private static final long serialVersionUID = 1L;
 	
 	private int ps;
-	public int nb_clients;
+	private int nb_clients;
+	
+	private Queue q;
 	
 	protected ProcessingApp(int ps) throws RemoteException{
 		
@@ -20,6 +23,10 @@ public class ProcessingApp extends UnicastRemoteObject implements ProcessingAppI
 		
 		this.ps = ps;
 		nb_clients = 0;
+		
+		q = new Queue();
+		q.start();
+		
 	}
 	
 	protected ProcessingApp() throws RemoteException {
@@ -28,28 +35,17 @@ public class ProcessingApp extends UnicastRemoteObject implements ProcessingAppI
 		
 		ps = 1;
 		nb_clients = 0;
+		
+		q = new Queue();
+		q.start();
 	}
 
 	@Override
 	public Matrix mult(Matrix M, float scal) throws RemoteException, MatrixException {
 		
-		int i,j;
-		int n = M.rows();
-		int m = M.cols();
+		q.addProcess(new ProcessMultS(M, scal, 5));
 		
-		Matrix M2 = M;
-		
-		for(i=0;i<n;i++){
-			
-			for(j=0;j<m;j++){
-				
-				M2.setValue(i, j, M.getValue(i, j)*scal);
-			}
-		}
-		
-		System.out.println("Nb clients: " + ++nb_clients);
-		
-		return M2;
+		return M;
 	}
 
 	@Override

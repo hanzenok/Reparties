@@ -38,7 +38,7 @@ public class Queue {
 		return duration;
 	}
 	
-	void start(){
+	public void start(){
 		
 		th = new QueueThread(this);
 		th.start();
