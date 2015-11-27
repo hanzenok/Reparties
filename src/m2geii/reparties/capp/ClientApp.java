@@ -9,9 +9,9 @@ import m2geii.reparties.matrix.Matrix;
 import m2geii.reparties.matrix.MatrixException;
 import m2geii.reparties.inters.ManagerAppInterface;
 
-public class client {
+public class ClientApp implements ClientAppInterface {
 
-	public static void main(String[] args) throws MatrixException, MalformedURLException, RemoteException, NotBoundException {
+	public void main(String[] args) throws MatrixException, MalformedURLException, RemoteException, NotBoundException {
 		
 	
 		int i,j;
@@ -24,11 +24,21 @@ public class client {
 				tab[i][j] = i+j;
 			
 		Matrix M = new Matrix(n, m, tab);
+		
+		
 		ManagerAppInterface pa = (ManagerAppInterface)Naming.lookup("122");
+		pa.registerClient(this);
 		
 		System.out.println("Before: \n" + M);
 		Matrix M2 = pa.mult(M, 2);
 		System.out.println("After: \n" + M2);
+	}
+
+	@Override
+	public void doSomething() throws RemoteException {
+		
+		System.out.println("Server invoked doSomething()");
+		
 	}
 
 }

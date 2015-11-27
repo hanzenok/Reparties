@@ -8,6 +8,7 @@ import java.rmi.server.UnicastRemoteObject;
 
 import m2geii.reparties.matrix.Matrix;
 import m2geii.reparties.matrix.MatrixException;
+import m2geii.reparties.capp.ClientAppInterface;
 import m2geii.reparties.inters.ManagerAppInterface;
 import m2geii.reparties.inters.ProcessingAppInterface;
 import m2geii.reparties.queue.Queue;
@@ -15,6 +16,8 @@ import m2geii.reparties.queue.Queue;
 public class ManagerApp extends UnicastRemoteObject implements ManagerAppInterface {
 	
 	private static final long serialVersionUID = 1L;
+	
+	private volatile ClientAppInterface client;
 	
 	protected ManagerApp(int ps) throws RemoteException{
 		
@@ -68,4 +71,14 @@ public class ManagerApp extends UnicastRemoteObject implements ManagerAppInterfa
 		return null;
 	}
 
+	@Override
+	public void registerClient(ClientAppInterface client) throws RemoteException {
+		
+		this.client = client;	
+	}
+
+    public void doSomethingOnClient() throws RemoteException {
+        
+    	client.doSomething();
+    }
 }
