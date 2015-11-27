@@ -23,7 +23,8 @@ public class Queue {
 	 */
 	public void addProcess(Process p) {
 		queue.add(p);
-		System.out.println("\n"+p.getProcessName()+" added");
+		
+		System.out.println(p.getProcessName()+" added");
 	}
 	
 	/**
@@ -76,16 +77,17 @@ public class Queue {
 		
 		// On ajoute 5 processus
 		q.addProcess(new Process("p1", 3));
-		q.addProcess(new Process("p2", 2));
-		q.addProcess(new Process("p3", 6));
-		q.addProcess(new Process("p4", 5));
-		q.addProcess(new Process("p5", 3));
-		
+
 		// On affiche la durÃ©e de la file, soit 19
 		System.out.println(q.getDuration());
 		
 		// On lance l'exÃ©cution
 		q.start();
+		
+		q.addProcess(new Process("p2", 2));
+		q.addProcess(new Process("p3", 6));
+		q.addProcess(new Process("p4", 5));
+		q.addProcess(new Process("p5", 3));
 		
 		// Le thread courrant attend 8 secondes mais les threads de la liste s'exÃ©cute 
 		try {
