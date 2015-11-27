@@ -43,7 +43,23 @@ public class ProcessingApp extends UnicastRemoteObject implements ProcessingAppI
 	@Override
 	public Matrix mult(Matrix M, float scal) throws RemoteException, MatrixException {
 		
-		q.addProcess(new ProcessMultS(M, scal, 5));
+//		q.addProcess(new ProcessMultS(M, scal, 5));
+//		
+//		try {Thread.sleep(8*1000);} 
+//		catch(InterruptedException e) {Thread.currentThread().interrupt();}
+		
+		int i,j;
+		int n = M.rows();
+		int m = M.cols();
+		
+		for(i=0;i<n;i++){
+			
+			for(j=0;j<m;j++){
+				
+				try {M.setValue(i, j, M.getValue(i, j)*scal);} 
+				catch (MatrixException e) {e.printStackTrace();}
+			}
+		}
 		
 		return M;
 	}

@@ -29,8 +29,6 @@ public class client {
 		System.out.println("Before: \n" + M);
 		Matrix M2 = pa.mult(M, 2);
 		System.out.println("After: \n" + M2);
-		
-		
 	}
 
 }

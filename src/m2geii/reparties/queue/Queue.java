@@ -19,6 +19,7 @@ public class Queue {
 		
 		if(!queue.isEmpty())
 			p = queue.pop();
+		
 		return p;
 	}
 	

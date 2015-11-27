@@ -43,8 +43,10 @@ public class ProcessMultS extends Process{
 		
 		System.out.println("end process:\n" + M);
 	}
-	
-	
 
-
+	@Override
+	public Object call() throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
