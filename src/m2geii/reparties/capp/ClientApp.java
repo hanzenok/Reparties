@@ -10,10 +10,11 @@ import m2geii.reparties.matrix.MatrixException;
 import m2geii.reparties.inters.ManagerAppInterface;
 
 public class ClientApp implements ClientAppInterface {
-
-	public void main(String[] args) throws MatrixException, MalformedURLException, RemoteException, NotBoundException {
-		
 	
+	static ManagerAppInterface pa;
+	
+	public static void main(String[] args) throws MatrixException, MalformedURLException, RemoteException, NotBoundException {
+		
 		int i,j;
 		int n=3, m=2;
 		
@@ -26,19 +27,30 @@ public class ClientApp implements ClientAppInterface {
 		Matrix M = new Matrix(n, m, tab);
 		
 		
-		ManagerAppInterface pa = (ManagerAppInterface)Naming.lookup("122");
-		pa.registerClient(this);
+		pa = (ManagerAppInterface)Naming.lookup("122");
 		
 		System.out.println("Before: \n" + M);
 		Matrix M2 = pa.mult(M, 2);
 		System.out.println("After: \n" + M2);
+		
+		while(true){}
 	}
 
-	@Override
 	public void doSomething() throws RemoteException {
 		
-		System.out.println("Server invoked doSomething()");
+		Thread t1 = new Thread(new Runnable() {
+		     public void run() {
+		    	 
+		    	 System.out.println("Server invoked doSomething()");
+		     }
+		});  
+		t1.start();
 		
+	}
+	
+	public void register() throws RemoteException {
+		
+		pa.registerClient(this);
 	}
 
 }
