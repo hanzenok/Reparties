@@ -23,7 +23,7 @@ public class ManagerAppServer {
 	    registry.rebind("122", ma);
 	    System.out.println("Server launched");
 	    
-	    //ma.doSomethingOnClient();
+	    ma.doSomethingOnClient();
 
 	}
 }

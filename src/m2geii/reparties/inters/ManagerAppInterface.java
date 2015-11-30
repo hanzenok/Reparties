@@ -3,7 +3,7 @@ package m2geii.reparties.inters;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 
-import m2geii.reparties.capp.ClientAppInterface;
+import m2geii.reparties.inters.ClientAppInterface;
 import m2geii.reparties.matrix.Matrix;
 import m2geii.reparties.matrix.MatrixException;
 

@@ -7,11 +7,12 @@ import java.rmi.RemoteException;
 
 import m2geii.reparties.matrix.Matrix;
 import m2geii.reparties.matrix.MatrixException;
+import m2geii.reparties.inters.ClientAppInterface;
 import m2geii.reparties.inters.ManagerAppInterface;
 
 public class ClientApp implements ClientAppInterface {
 	
-	static ManagerAppInterface pa;
+	static ManagerAppInterface ma;
 	
 	public static void main(String[] args) throws MatrixException, MalformedURLException, RemoteException, NotBoundException {
 		
@@ -27,10 +28,11 @@ public class ClientApp implements ClientAppInterface {
 		Matrix M = new Matrix(n, m, tab);
 		
 		
-		pa = (ManagerAppInterface)Naming.lookup("122");
+		ma = (ManagerAppInterface)Naming.lookup("122");
+		register();
 		
 		System.out.println("Before: \n" + M);
-		Matrix M2 = pa.mult(M, 2);
+		Matrix M2 = ma.mult(M, 2);
 		System.out.println("After: \n" + M2);
 		
 		while(true){}
@@ -50,7 +52,7 @@ public class ClientApp implements ClientAppInterface {
 	
 	public void register() throws RemoteException {
 		
-		pa.registerClient(this);
+		ma.registerClient(this);
 	}
 
 }
