@@ -12,7 +12,7 @@ import m2geii.reparties.inters.ManagerAppInterface;
 
 public class ClientApp implements ClientAppInterface {
 	
-	static ManagerAppInterface ma;
+	private ManagerAppInterface ma;
 	
 	public static void main(String[] args) throws MatrixException, MalformedURLException, RemoteException, NotBoundException {
 		
@@ -28,31 +28,32 @@ public class ClientApp implements ClientAppInterface {
 		Matrix M = new Matrix(n, m, tab);
 		
 		
-		ma = (ManagerAppInterface)Naming.lookup("122");
-		register();
+		ManagerAppInterface ma = (ManagerAppInterface)Naming.lookup("122");
 		
 		System.out.println("Before: \n" + M);
 		Matrix M2 = ma.mult(M, 2);
 		System.out.println("After: \n" + M2);
 		
-		while(true){}
 	}
 
-	public void doSomething() throws RemoteException {
-		
-		Thread t1 = new Thread(new Runnable() {
-		     public void run() {
-		    	 
-		    	 System.out.println("Server invoked doSomething()");
-		     }
-		});  
-		t1.start();
-		
-	}
-	
-	public void register() throws RemoteException {
-		
-		ma.registerClient(this);
-	}
+//	public void doSomething() throws RemoteException {
+//		
+//		
+//		Thread t1 = new Thread(new Runnable() {
+//		     public void run() {
+//		    	 
+//		    	 ma.registerClient(this);
+//		    	 
+//		    	 System.out.println("Server invoked doSomething()");
+//		     }
+//		});  
+//		t1.start();
+//		
+//	}
+//	
+//	public void register() throws RemoteException {
+//		
+//		ma.registerClient(this);
+//	}
 
 }

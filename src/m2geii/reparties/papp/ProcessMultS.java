@@ -1,4 +1,4 @@
-package m2geii.reparties.papp.server;
+package m2geii.reparties.papp;
 
 import m2geii.reparties.matrix.Matrix;
 import m2geii.reparties.matrix.MatrixException;

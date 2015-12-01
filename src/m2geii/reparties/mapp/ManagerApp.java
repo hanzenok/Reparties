@@ -71,14 +71,14 @@ public class ManagerApp extends UnicastRemoteObject implements ManagerAppInterfa
 		return null;
 	}
 
-	@Override
-	public void registerClient(ClientAppInterface client) throws RemoteException {
-		
-		this.client = client;	
-	}
+//	@Override
+//	public void registerClient(ClientAppInterface client) throws RemoteException {
+//		
+//		this.client = client;	
+//	}
 
-    public void doSomethingOnClient() throws RemoteException {
-        
-    	client.doSomething();
-    }
+//    public void doSomethingOnClient() throws RemoteException {
+//        
+//    	client.doSomething();
+//    }
 }

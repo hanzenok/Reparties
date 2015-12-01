@@ -4,5 +4,5 @@ import java.rmi.RemoteException;
 
 public interface ClientAppInterface {
 	
-	public void doSomething() throws RemoteException;
+//	public void doSomething() throws RemoteException;
 }
