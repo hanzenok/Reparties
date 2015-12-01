@@ -7,10 +7,9 @@ import java.rmi.RemoteException;
 
 import m2geii.reparties.matrix.Matrix;
 import m2geii.reparties.matrix.MatrixException;
-import m2geii.reparties.inters.ClientAppInterface;
 import m2geii.reparties.inters.ManagerAppInterface;
 
-public class ClientApp implements ClientAppInterface {
+public class ClientApp {
 	
 	private ManagerAppInterface ma;
 	
@@ -35,25 +34,5 @@ public class ClientApp implements ClientAppInterface {
 		System.out.println("After: \n" + M2);
 		
 	}
-
-//	public void doSomething() throws RemoteException {
-//		
-//		
-//		Thread t1 = new Thread(new Runnable() {
-//		     public void run() {
-//		    	 
-//		    	 ma.registerClient(this);
-//		    	 
-//		    	 System.out.println("Server invoked doSomething()");
-//		     }
-//		});  
-//		t1.start();
-//		
-//	}
-//	
-//	public void register() throws RemoteException {
-//		
-//		ma.registerClient(this);
-//	}
 
 }
