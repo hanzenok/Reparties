@@ -28,27 +28,32 @@ public class ManagerApp extends UnicastRemoteObject implements ManagerAppInterfa
 	}
 
 	@Override
-	public void mult(final Matrix M, final float scal) throws RemoteException, MatrixException {
+	public void mult(final Matrix M, final float scal) throws RemoteException {
 		
-		ProcessingAppInterface pa;
-		Matrix M2 = new Matrix();
-		
-		try {
-			System.out.println("ManagerApp calculates smth...");
-			pa = (ProcessingAppInterface)Naming.lookup("123");
-			
-			M2 = pa.mult(M, scal);
-			
-		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (NotBoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		client.setResult(M2);
-		client.showResult();
+		Thread t1 = new Thread(new Runnable() {
+			public void run(){
+		    	
+		    	try{
+		    		ProcessingAppInterface pa;
+		    		Matrix M2 = new Matrix();
+				
+					System.out.println("ManagerApp calculates smth...");
+					pa = (ProcessingAppInterface)Naming.lookup("123");
+					
+					M2 = pa.mult(M, scal);
+				
+					client.setResult(M2);
+					client.showResult();
+					
+				}
+		    	catch (RemoteException e) { e.printStackTrace();}
+		    	catch (MatrixException e) { e.printStackTrace();}
+		    	catch (MalformedURLException e) { e.printStackTrace();}
+		    	catch (NotBoundException e) { e.printStackTrace();}
+			}
+		});  
+		t1.start();
+
 	}
 
 	@Override

@@ -33,7 +33,7 @@ public class ProcessingApp extends UnicastRemoteObject implements ProcessingAppI
 	@Override
 	public Matrix mult(Matrix M, float scal) throws RemoteException, MatrixException {
 		
-		try {Thread.sleep(8*1000);} 
+		try {Thread.sleep(2*1000);} 
 		catch(InterruptedException e) {Thread.currentThread().interrupt();}
 		
 		System.out.println("ProcessingApp calculates smth...");
