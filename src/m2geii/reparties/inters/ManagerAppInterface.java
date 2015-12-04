@@ -12,4 +12,7 @@ public interface ManagerAppInterface extends Remote {
 	public Matrix mult(Matrix m1, Matrix m2) throws RemoteException, MatrixException;
 	public Matrix add(Matrix m1, Matrix m2) throws RemoteException, MatrixException;
 	public Matrix transpose(Matrix m) throws RemoteException, MatrixException;
+	
+	public void registerClient(ClientAppInterface ca) throws RemoteException;
+	public void send() throws RemoteException;
 }

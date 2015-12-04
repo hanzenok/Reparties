@@ -8,12 +8,14 @@ import java.rmi.server.UnicastRemoteObject;
 
 import m2geii.reparties.matrix.Matrix;
 import m2geii.reparties.matrix.MatrixException;
+import m2geii.reparties.inters.ClientAppInterface;
 import m2geii.reparties.inters.ManagerAppInterface;
 import m2geii.reparties.inters.ProcessingAppInterface;
 
 public class ManagerApp extends UnicastRemoteObject implements ManagerAppInterface {
 	
 	private static final long serialVersionUID = 1L;
+	private ClientAppInterface ca;
 	
 	protected ManagerApp(int ps) throws RemoteException{
 		
@@ -26,7 +28,7 @@ public class ManagerApp extends UnicastRemoteObject implements ManagerAppInterfa
 	}
 
 	@Override
-	public Matrix mult(Matrix M, float scal) throws RemoteException, MatrixException {
+	public Matrix mult(final Matrix M, final float scal) throws RemoteException, MatrixException {
 		
 		ProcessingAppInterface pa;
 		Matrix M2 = new Matrix();
@@ -36,8 +38,9 @@ public class ManagerApp extends UnicastRemoteObject implements ManagerAppInterfa
 			pa = (ProcessingAppInterface)Naming.lookup("123");
 			
 			M2 = pa.mult(M, scal);
-			
+
 			return M2;
+			
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -67,14 +70,18 @@ public class ManagerApp extends UnicastRemoteObject implements ManagerAppInterfa
 		return null;
 	}
 
-//	@Override
-//	public void registerClient(ClientAppInterface client) throws RemoteException {
-//		
-//		this.client = client;	
-//	}
+	@Override
+	public void registerClient(ClientAppInterface ca) throws RemoteException {
+		
+		this.ca = ca;
+		
+	}
 
-//    public void doSomethingOnClient() throws RemoteException {
-//        
-//    	client.doSomething();
-//    }
+	@Override
+	public void send() throws RemoteException {
+		
+		ca.blink();
+		
+	}
+
 }
