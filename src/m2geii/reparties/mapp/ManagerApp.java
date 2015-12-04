@@ -15,7 +15,7 @@ import m2geii.reparties.inters.ProcessingAppInterface;
 public class ManagerApp extends UnicastRemoteObject implements ManagerAppInterface {
 	
 	private static final long serialVersionUID = 1L;
-	private ClientAppInterface ca;
+	private ClientAppInterface client;
 	
 	protected ManagerApp(int ps) throws RemoteException{
 		
@@ -28,7 +28,7 @@ public class ManagerApp extends UnicastRemoteObject implements ManagerAppInterfa
 	}
 
 	@Override
-	public Matrix mult(final Matrix M, final float scal) throws RemoteException, MatrixException {
+	public void mult(final Matrix M, final float scal) throws RemoteException, MatrixException {
 		
 		ProcessingAppInterface pa;
 		Matrix M2 = new Matrix();
@@ -38,8 +38,6 @@ public class ManagerApp extends UnicastRemoteObject implements ManagerAppInterfa
 			pa = (ProcessingAppInterface)Naming.lookup("123");
 			
 			M2 = pa.mult(M, scal);
-
-			return M2;
 			
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
@@ -49,7 +47,8 @@ public class ManagerApp extends UnicastRemoteObject implements ManagerAppInterfa
 			e.printStackTrace();
 		}
 		
-		return M2;
+		client.setResult(M2);
+		client.showResult();
 	}
 
 	@Override
@@ -73,14 +72,14 @@ public class ManagerApp extends UnicastRemoteObject implements ManagerAppInterfa
 	@Override
 	public void registerClient(ClientAppInterface ca) throws RemoteException {
 		
-		this.ca = ca;
+		this.client = ca;
 		
 	}
 
 	@Override
 	public void send() throws RemoteException {
 		
-		ca.blink();
+		client.showResult();
 		
 	}
 

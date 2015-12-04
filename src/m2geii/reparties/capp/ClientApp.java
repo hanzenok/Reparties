@@ -14,6 +14,7 @@ import m2geii.reparties.inters.ManagerAppInterface;
 public class ClientApp extends UnicastRemoteObject implements ClientAppInterface{
 	
 	private ManagerAppInterface ma;
+	private Matrix M;
 	
 	protected ClientApp() throws RemoteException {
 		super();
@@ -27,15 +28,27 @@ public class ClientApp extends UnicastRemoteObject implements ClientAppInterface
 	}
 
 	@Override
-	public void blink() throws RemoteException {
+	public void showResult() throws RemoteException {
 		
-		System.out.println("Blink!!");
+		System.out.println("From client: \n" + M.toString());
+	}
+	
+	@Override
+	public void setResult(Matrix M) throws RemoteException {
+		
+		this.M = M;
 	}
 
 	@Override
-	public Matrix mult(Matrix m, float scal) throws RemoteException, MatrixException {
+	public Matrix getResult() throws RemoteException {
 		
-		return ma.mult(m, scal);
+		return M;
+	}
+	
+	@Override
+	public void mult(Matrix m, float scal) throws RemoteException, MatrixException {
+		
+		ma.mult(m,scal);
 	}
 
 	@Override
@@ -58,5 +71,4 @@ public class ClientApp extends UnicastRemoteObject implements ClientAppInterface
 		return null;
 	}
 	
-
 }
