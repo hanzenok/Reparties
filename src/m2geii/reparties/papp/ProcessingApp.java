@@ -5,9 +5,7 @@ import java.rmi.server.UnicastRemoteObject;
 
 import m2geii.reparties.matrix.Matrix;
 import m2geii.reparties.matrix.MatrixException;
-import m2geii.reparties.papp.ProcessMultS;
 import m2geii.reparties.inters.ProcessingAppInterface;
-import m2geii.reparties.queue.Queue;
 
 public class ProcessingApp extends UnicastRemoteObject implements ProcessingAppInterface {
 	
@@ -16,18 +14,12 @@ public class ProcessingApp extends UnicastRemoteObject implements ProcessingAppI
 	private int ps;
 	private int nb_clients;
 	
-	private Queue q;
-	
 	protected ProcessingApp(int ps) throws RemoteException{
 		
 		super();
 		
 		this.ps = ps;
 		nb_clients = 0;
-		
-		q = new Queue();
-		q.start();
-		
 	}
 	
 	protected ProcessingApp() throws RemoteException {
@@ -36,9 +28,6 @@ public class ProcessingApp extends UnicastRemoteObject implements ProcessingAppI
 		
 		ps = 1;
 		nb_clients = 0;
-		
-		q = new Queue();
-		q.start();
 	}
 
 	@Override

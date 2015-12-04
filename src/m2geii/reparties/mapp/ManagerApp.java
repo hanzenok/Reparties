@@ -10,7 +10,6 @@ import m2geii.reparties.matrix.Matrix;
 import m2geii.reparties.matrix.MatrixException;
 import m2geii.reparties.inters.ManagerAppInterface;
 import m2geii.reparties.inters.ProcessingAppInterface;
-import m2geii.reparties.queue.Queue;
 
 public class ManagerApp extends UnicastRemoteObject implements ManagerAppInterface {
 	
