@@ -4,6 +4,8 @@ import java.net.MalformedURLException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 
 import m2geii.reparties.matrix.Matrix;
@@ -17,9 +19,19 @@ public class ManagerApp extends UnicastRemoteObject implements ManagerAppInterfa
 	private static final long serialVersionUID = 1L;
 	private ClientAppInterface client;
 	
-	protected ManagerApp(int ps) throws RemoteException{
+	private String host;
+	private int ps;
+	
+	protected ManagerApp(int ps, String host) throws RemoteException{
 		
 		super();
+		
+		if(System.getSecurityManager() == null) {
+		    System.setSecurityManager(new SecurityManager());
+		}
+		
+		this.host = host;
+		this.ps = ps;
 	}
 	
 	protected ManagerApp() throws RemoteException {
@@ -38,7 +50,9 @@ public class ManagerApp extends UnicastRemoteObject implements ManagerAppInterfa
 		    		Matrix M2 = new Matrix();
 				
 					System.out.println("ManagerApp calculates smth...");
-					pa = (ProcessingAppInterface)Naming.lookup("123");
+					Registry registry = LocateRegistry.getRegistry(host);
+					
+					pa = (ProcessingAppInterface)registry.lookup("123");
 					
 					M2 = pa.mult(M, scal);
 				
@@ -48,7 +62,6 @@ public class ManagerApp extends UnicastRemoteObject implements ManagerAppInterfa
 				}
 		    	catch (RemoteException e) { e.printStackTrace();}
 		    	catch (MatrixException e) { e.printStackTrace();}
-		    	catch (MalformedURLException e) { e.printStackTrace();}
 		    	catch (NotBoundException e) { e.printStackTrace();}
 			}
 		});  

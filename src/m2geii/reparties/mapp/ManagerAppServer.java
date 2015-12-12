@@ -11,13 +11,20 @@ public class ManagerAppServer {
 
 	public static void main(String[] args) throws RemoteException, MalformedURLException {
 		
+		if(args.length == 0){
+			
+			System.out.println("Exemple d'utilisation:\n./mapp.sh localhost\n./mapp.sh 192.168.120.2\n");
+			
+			System.exit(0);
+		}
+		
 		if(System.getSecurityManager() == null) {
 			
 			System.setSecurityManager(new SecurityManager());
 		}
 		
 		System.out.println("Creation of object");
-		ManagerAppInterface ma = new ManagerApp();
+		ManagerAppInterface ma = new ManagerApp(0, args[0]);
 		
 	    Registry registry = LocateRegistry.getRegistry();
 	    registry.rebind("122", ma);
