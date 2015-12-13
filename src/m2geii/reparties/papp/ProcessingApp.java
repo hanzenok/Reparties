@@ -7,11 +7,16 @@ import m2geii.reparties.matrix.Matrix;
 import m2geii.reparties.matrix.MatrixException;
 import m2geii.reparties.inters.ProcessingAppInterface;
 
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
+
 public class ProcessingApp extends UnicastRemoteObject implements ProcessingAppInterface {
 	
 	private static final long serialVersionUID = 1L;
 	
-	private int ps;
+	private int ps; //capacite de serveur
+	private int current_ps; //capacite actuelles. si  = 0 cad serveur est chargee
+	private final Lock mutex = new ReentrantLock(true); //mutex pour threads
 //	private int nb_clients;
 	
 	protected ProcessingApp(int ps) throws RemoteException{
@@ -19,6 +24,7 @@ public class ProcessingApp extends UnicastRemoteObject implements ProcessingAppI
 		super();
 		
 		this.ps = ps;
+		current_ps = ps;
 //		nb_clients = 0;
 	}
 	
@@ -27,16 +33,20 @@ public class ProcessingApp extends UnicastRemoteObject implements ProcessingAppI
 		super();
 		
 		ps = 1;
+		current_ps = ps;
 //		nb_clients = 0;
 	}
 
 	@Override
 	public Matrix mult(Matrix M, float scal) throws RemoteException, MatrixException {
 		
-		try {Thread.sleep(ps*3*1000);} 
-		catch(InterruptedException e) {Thread.currentThread().interrupt();}
+//		mutex.lock();
+//		current_ps--;//dercremente la capacite actuelle
+		System.out.println("ProcessingApp calculates scalar multiplication. Busyness is " + current_ps);
+//		mutex.unlock();
 		
-		System.out.println("ProcessingApp calculates scalar multiplication...");
+		try {Thread.sleep(ps*3*1000*3);} 
+		catch(InterruptedException e) {Thread.currentThread().interrupt();}
 		
 		int i,j;
 		int n = M.rows();
