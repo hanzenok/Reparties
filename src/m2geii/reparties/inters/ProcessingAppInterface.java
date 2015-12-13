@@ -13,4 +13,6 @@ public interface ProcessingAppInterface extends Remote {
 	public Matrix add(Matrix m1, Matrix m2) throws RemoteException, MatrixException;
 	public Matrix transpose(Matrix m) throws RemoteException, MatrixException;
 	
+	public int getBusyness() throws RemoteException;
+	
 }

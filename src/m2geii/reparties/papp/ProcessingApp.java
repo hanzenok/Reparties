@@ -36,7 +36,7 @@ public class ProcessingApp extends UnicastRemoteObject implements ProcessingAppI
 		try {Thread.sleep(ps*3*1000);} 
 		catch(InterruptedException e) {Thread.currentThread().interrupt();}
 		
-		System.out.println("ProcessingApp calculates smth...");
+		System.out.println("ProcessingApp calculates scalar multiplication...");
 		
 		int i,j;
 		int n = M.rows();
@@ -71,10 +71,14 @@ public class ProcessingApp extends UnicastRemoteObject implements ProcessingAppI
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
-	public int getBusyness(){
+
+	@Override
+	public int getBusyness() throws RemoteException {
 		
-		return ps;
+		int tmp = ps; //sinon cela ne marche pas
+		
+		return tmp;
 	}
+	
 
 }
