@@ -12,14 +12,14 @@ public class ProcessingApp extends UnicastRemoteObject implements ProcessingAppI
 	private static final long serialVersionUID = 1L;
 	
 	private int ps;
-	private int nb_clients;
+//	private int nb_clients;
 	
 	protected ProcessingApp(int ps) throws RemoteException{
 		
 		super();
 		
 		this.ps = ps;
-		nb_clients = 0;
+//		nb_clients = 0;
 	}
 	
 	protected ProcessingApp() throws RemoteException {
@@ -27,13 +27,13 @@ public class ProcessingApp extends UnicastRemoteObject implements ProcessingAppI
 		super();
 		
 		ps = 1;
-		nb_clients = 0;
+//		nb_clients = 0;
 	}
 
 	@Override
 	public Matrix mult(Matrix M, float scal) throws RemoteException, MatrixException {
 		
-		try {Thread.sleep(2*1000);} 
+		try {Thread.sleep(ps*3*1000);} 
 		catch(InterruptedException e) {Thread.currentThread().interrupt();}
 		
 		System.out.println("ProcessingApp calculates smth...");
@@ -70,6 +70,11 @@ public class ProcessingApp extends UnicastRemoteObject implements ProcessingAppI
 	public Matrix transpose(Matrix m) throws RemoteException {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	public int getBusyness(){
+		
+		return ps;
 	}
 
 }

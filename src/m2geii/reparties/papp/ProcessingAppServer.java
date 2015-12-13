@@ -11,17 +11,23 @@ public class ProcessingAppServer {
 
 	public static void main(String[] args) throws RemoteException, MalformedURLException {
 		
+		if(args.length <= 1){
+			
+			System.out.println("Exemple d'utilisation:\n./papp.sh {server name} {busyness from 1 to 10}\n");
+			
+			System.exit(0);
+		}
+		
 		if(System.getSecurityManager() == null) {
 			
 			System.setSecurityManager(new SecurityManager());
 		}
 		
-		System.out.println("Creation of object");
-		ProcessingAppInterface pa = new ProcessingApp();
+		ProcessingAppInterface pa = new ProcessingApp(Integer.parseInt(args[1]));
 		
 	    Registry registry = LocateRegistry.getRegistry();
-	    registry.rebind("123", pa);
-	    System.out.println("Server launched");
+	    registry.rebind(args[0], pa);
+	    System.out.println("Server " + args[0] + " is launched. Busyness is " + ((ProcessingApp) pa).getBusyness() +  " of 10\n");
 
 	}
 }
