@@ -42,7 +42,6 @@ public class ManagerApp extends UnicastRemoteObject implements ManagerAppInterfa
 		
 		registry = LocateRegistry.getRegistry(host);
 		
-		
 		for(int i=1; i<args.length; i++){
 			
 			servers[i-1] = (ProcessingAppInterface)registry.lookup(args[i]);
@@ -114,20 +113,20 @@ public class ManagerApp extends UnicastRemoteObject implements ManagerAppInterfa
 		int i,n = servers.length;
 		
 		int i_min = 0; //indice d'un valeur minimale
-		int ps = 0;
 		int min = servers[0].getBusyness();
 		
 		if(n!=0){
 			
 			for(i=0; i<n; i++){
 			
-				if(min < servers[i].getBusyness()){
+				if(min > servers[i].getBusyness()){
 					
 					i_min = i;
+					min = servers[i].getBusyness();
 				}
 			}
 			
-			return servers[0];
+			return servers[i_min];
 		}
 		else 
 			return null;
