@@ -56,7 +56,7 @@ public class ClientApp extends UnicastRemoteObject implements ClientAppInterface
 	@Override
 	public void mult(Matrix m, float scal) throws RemoteException, MatrixException {
 		
-		ma.mult(m,scal);
+		ma.mult(name,m,scal);
 	}
 
 	@Override

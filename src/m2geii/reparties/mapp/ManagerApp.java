@@ -7,6 +7,7 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.ArrayList;
 
 import m2geii.reparties.matrix.Matrix;
 import m2geii.reparties.matrix.MatrixException;
@@ -18,7 +19,8 @@ import m2geii.reparties.inters.ProcessingAppInterface;
 public class ManagerApp extends UnicastRemoteObject implements ManagerAppInterface {
 	
 	private static final long serialVersionUID = 1L;
-	private ClientAppInterface client;
+	private ArrayList<ClientAppInterface> clients; //liste des clients connectees
+	
 	
 	private String host;
 	
@@ -28,6 +30,8 @@ public class ManagerApp extends UnicastRemoteObject implements ManagerAppInterfa
 	protected ManagerApp(String[] args) throws RemoteException, NotBoundException{
 		
 		super();
+		
+		clients = new ArrayList<ClientAppInterface>();
 		
 		if(System.getSecurityManager() == null) {
 		    System.setSecurityManager(new SecurityManager());
@@ -51,10 +55,12 @@ public class ManagerApp extends UnicastRemoteObject implements ManagerAppInterfa
 	protected ManagerApp() throws RemoteException {
 		
 		super();
+		
+		clients = new ArrayList<ClientAppInterface>();
 	}
 
 	@Override
-	public void mult(final Matrix M, final float scal) throws RemoteException {
+	public void mult(final String clientname, final Matrix M, final float scal) throws RemoteException {
 		
 		Thread t = new Thread(new Runnable() {
 			public void run(){
@@ -62,10 +68,17 @@ public class ManagerApp extends UnicastRemoteObject implements ManagerAppInterfa
 		    	try{
 		    		Matrix M2 = new Matrix();
 					
+		    		//recherche de client qui a solicite la connexion
+		    		ClientAppInterface client = getClient(clientname);
+		    		
+		    		System.out.print("Calculation scalar multiplication for " + client.getName() +  "..");
+		    		
 					M2 = getLessBusyest().mult(M, scal);
 				
 					client.setResult(M2);
 					client.showResult();
+					
+					System.out.println(" done\n");
 					
 				}
 		    	catch (RemoteException e) { e.printStackTrace();}
@@ -96,8 +109,8 @@ public class ManagerApp extends UnicastRemoteObject implements ManagerAppInterfa
 
 	@Override
 	public void registerClient(ClientAppInterface ca) throws RemoteException {
-		
-		this.client = ca;
+
+		clients.add(ca);
 		
 	}
 
@@ -130,6 +143,19 @@ public class ManagerApp extends UnicastRemoteObject implements ManagerAppInterfa
 		}
 		else 
 			return null;
+	}
+	
+	public ClientAppInterface getClient(String name) throws RemoteException{
+		
+		for (ClientAppInterface client: clients){
+			
+			if (client.getName().equals(name)){
+				
+				return client;
+			}
+		}
+		
+		return null;
 	}
 
 }
