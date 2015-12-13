@@ -56,7 +56,7 @@ public class ManagerApp extends UnicastRemoteObject implements ManagerAppInterfa
 	@Override
 	public void mult(final Matrix M, final float scal) throws RemoteException {
 		
-		Thread t1 = new Thread(new Runnable() {
+		Thread t = new Thread(new Runnable() {
 			public void run(){
 		    	
 		    	try{
@@ -72,7 +72,7 @@ public class ManagerApp extends UnicastRemoteObject implements ManagerAppInterfa
 		    	catch (MatrixException e) { e.printStackTrace();}
 			}
 		});  
-		t1.start();
+		t.start();
 
 	}
 
@@ -101,12 +101,12 @@ public class ManagerApp extends UnicastRemoteObject implements ManagerAppInterfa
 		
 	}
 
-	@Override
-	public void send() throws RemoteException {
-		
-		client.showResult();
-		
-	}
+//	@Override
+//	public void send() throws RemoteException {
+//		
+//		client.showResult();
+//		
+//	}
 	
 	public ProcessingAppInterface getLessBusyest() throws RemoteException{
 		

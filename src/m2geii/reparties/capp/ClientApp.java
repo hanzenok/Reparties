@@ -13,17 +13,25 @@ import m2geii.reparties.inters.ManagerAppInterface;
 
 public class ClientApp extends UnicastRemoteObject implements ClientAppInterface{
 	
+	private static final long serialVersionUID = 1L;
+	
 	private ManagerAppInterface ma;
 	private Matrix M;
+	
+	private String name;
 	
 	protected ClientApp() throws RemoteException {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	
-	protected ClientApp(ManagerAppInterface ma) throws RemoteException{
+	protected ClientApp(String name, ManagerAppInterface ma) throws RemoteException{
+		
+		super();
 		
 		this.ma = ma;
+		this.name = name;
+		
 		ma.registerClient(this);
 	}
 
@@ -69,6 +77,12 @@ public class ClientApp extends UnicastRemoteObject implements ClientAppInterface
 	public Matrix transpose(Matrix m) throws RemoteException, MatrixException {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public String getName() {
+		
+		return name;
 	}
 	
 }
